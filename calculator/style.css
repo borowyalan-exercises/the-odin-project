@@ -1,0 +1,53 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calculator-container {
+  border: solid 5px green;
+  padding: 1em;
+}
+
+#display {
+  height: 15vh;
+  width: 100%;
+
+  margin-bottom: 1em;
+
+  border-radius: 5px;
+
+  background-color: green;
+}
+
+.keys-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 1em;
+}
+
+.key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+	border: solid 3px red;
+	
+	padding: 0.2em;
+
+  font-size: 2em;
+}
+
+/* force keys to be at least as tall as wide */
+.key::before {
+  content: "";
+  padding-bottom: 100%;
+  display: block;
+}
