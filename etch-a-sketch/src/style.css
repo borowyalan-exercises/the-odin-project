@@ -1,0 +1,149 @@
+@font-face {
+	font-family: orangeJuice;
+	src: url(./fonts/orange-juice-2.0/orange-juice-2.0.ttf)
+}
+
+:root {
+  --grid-dimension: 16;
+}
+
+html, body, .container {
+  height: 100%;
+  width:100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	color: #404040;
+	max-width: 1000px;
+	margin: 0 auto;
+	text-align: center;
+  }
+
+h1 {
+	margin: 0px;
+	font-family: 'orangeJuice';
+	font-size: 70px;
+	width: 700px;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 3%;
+	justify-content: space-evenly;	
+	flex-direction: row;
+}
+
+.row-main {
+  display: flex;
+  flex-basis: 100%;
+  justify-content: center;
+  flex-direction: row;
+  width: 400px;
+  height: 400px;
+}
+
+#js-rangeslider-0 {
+	margin-left: 50px;
+	height: 400px;
+}
+
+#grid {
+  display: grid;
+  width: 400px;
+  height: 400px;
+  grid-template-columns: repeat(var(--grid-dimension), 1fr);
+  grid-template-rows: repeat(var(--grid-dimension), 1fr);
+  border: 0.1px solid rgb(0, 0, 0, 0.6);
+  /* grid-gap: 0.001rem; */
+}
+
+.grid-placeholder {
+	background-color: white;
+	border: 0.1px solid rgb(0, 0, 0, 0.2);
+}
+
+.item {
+  background-color: white;
+  border: 0.1px solid rgb(0, 0, 0, 0.2);
+}
+
+.filled {
+  background-color: rgba(37, 36, 36, 0.9);
+  border: none;
+  }
+
+#clearBtn {
+  display: block;
+  width: 400px;
+  height: 40px;
+  margin-top: 30px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  font-size: 24px;
+  background-color: rgb(230, 230, 230);
+  color: black;
+}
+
+.slider {
+	margin-left: 1000px;
+}
+  
+.rangeslider__handle {
+	border-radius: 0px;
+}
+  .rangeslider,
+  .rangeslider__fill {
+	transition: background 0.3s;
+	
+  }
+  
+  .rangeslider--is-lowest-value {
+	background-color: white;
+  }
+  
+  .rangeslider--is-highest-value .rangeslider__fill {
+	background-color: hotpink;
+  }
+
+
+  @media only screen and (max-width: 600px ){
+	h1 {
+		margin-bottom: 5%;
+		margin-top: 5%;
+		position: relative;
+		font-size: 13vw;
+		max-width: 100%;
+	}
+
+	body {
+		overflow-x: hidden;
+		position: relative;
+	}
+
+	#grid {
+		width: 75vw;
+		height: 75vw;
+	}
+
+	.row-main {
+		width: 90vw;
+		height: 90vw;
+	}
+
+	#js-rangeslider-0 {
+		margin-left: 7.5%;
+		height: 75vw;
+	}
+
+	#clearBtn {
+		position: fixed;
+		bottom: 0%;
+		font-family: 'orangeJuice', sans-serif;
+	}
+ }

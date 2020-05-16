@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+	<script
+	src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.0/rangeslider.min.js"></script>
+	<!-- <script src="./material-design/material-components-web.min.js"></script> -->
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.0/rangeslider.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+	<link rel="stylesheet" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	
+
+</head>
+<body>
+	<h1 id="main-title">Etch-a-Sketch (alpha)</h1>	
+	<div class="container">
+		<div class="row-main">
+			<!-- <div id="grid" class="grid-placeholder"></div> -->
+			<div id="grid"></div>
+			<input id="slider"
+			type="range" 
+			min="5" 
+			max="1600" 
+			value="0" 
+			data-orientation= "vertical" 
+			data-rangeslider="0">
+		</div>
+			
+		<button id='clearBtn' class="mdc-button--raised"> Clear the grid</button>
+	</div>
+    
+
+
+	<script src="./index.js"></script>
+</body>
+</html>

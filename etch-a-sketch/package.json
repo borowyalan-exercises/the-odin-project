@@ -1,0 +1,11 @@
+{
+  "name": "etch-a-sketch",
+  "version": "1.0.0",
+  "description": "simple project for theodinprojects.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Alan Borowy",
+  "license": "MIT"
+}
