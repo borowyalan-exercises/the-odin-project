@@ -52,8 +52,9 @@ function buttonPressed(key) {
 function addToDisplay(key) {
   const display = document.querySelector("#display");
 
-  if (!key) {
+  if (!key || key == undefined) {
     display.textContent = "";
+    return;
   }
 
   if (key == "divisionByZero") {
