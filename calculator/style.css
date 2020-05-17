@@ -10,8 +10,10 @@ body {
 }
 
 .calculator-container {
-  border: solid 5px green;
   padding: 1em;
+
+  border-radius: 15px;
+  border: solid 5px green;
 }
 
 #display {
@@ -53,6 +55,11 @@ body {
 
 .key[type="equals"] { 
   grid-row-end: span 2;
+}
+
+.key[type="clear"] {
+  color: white;
+  background-color: red;
 }
 
 /* force keys to be at least as tall as wide */
