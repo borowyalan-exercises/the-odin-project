@@ -50,7 +50,10 @@ body {
   border: solid 3px red;
 
   cursor: pointer;
+  user-select: none;
+  -moz-user-select: none;
   font-size: 2em;
+
 }
 
 .key[type="equals"] { 
