@@ -2,9 +2,13 @@ let displayValue = [];
 let operators = [];
 let currentNum = "";
 let numbers = [];
+let settings = {
+  vibrations: document.querySelector("#vibrationsSetting"),
+};
 
 function buttonPressed(key) {
-  window.navigator.vibrate(5)
+  if (settings.vibrations.checked) window.navigator.vibrate(5);
+
   const keyAttribute = key.getAttribute("type");
   const getLastValue = (array) => array[array.length - 1];
   const isLastIndexAnOperator =
@@ -42,8 +46,7 @@ function buttonPressed(key) {
     case "percent":
       return;
 
-    default:
-      // number
+    case "number":
       currentNum = currentNum.concat(key.textContent);
       addToDisplay(key.textContent);
   }

@@ -1,12 +1,14 @@
 html,
 body {
   height: 100%;
+  overflow-y: hidden;
 }
 
 body {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  flex-direction: column;
 }
 
 .calculator-container {
@@ -53,10 +55,9 @@ body {
   user-select: none;
   -moz-user-select: none;
   font-size: 2em;
-
 }
 
-.key[type="equals"] { 
+.key[type="equals"] {
   grid-row-end: span 2;
 }
 
@@ -70,4 +71,18 @@ body {
   content: "";
   padding-bottom: 100%;
   display: block;
+}
+
+fieldset#settings {
+  width: 40%;
+  height: auto;
+
+  padding: 2em;
+
+  border: 2px solid black;
+  border-radius: 5px;
+
+  font-size: 1em;
+
+  -moz-user-select: none;
 }
