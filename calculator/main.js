@@ -42,6 +42,10 @@ function buttonPressed(key) {
       addToDisplay(key.textContent);
       return;
 
+    // TODO
+    case "percent":
+      return;
+
     default:
       // number
       currentNum = currentNum.concat(key.textContent);
@@ -149,4 +153,4 @@ function addEventListeners() {
 addEventListeners();
 
 // don't run the code in the browser where the 'module' does not exist
-if(typeof module != "undefined") module.exports = evaluateOperation;
+if (typeof module != "undefined") module.exports = evaluateOperation;
