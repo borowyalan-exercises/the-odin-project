@@ -89,13 +89,9 @@ function evaluateOperation(numbersArr, operatorsArr) {
     operatorsArr.splice(index, 1);
   }
 
-  let multiplicationIndex = operatorsArr.indexOf("*");
-  let divisionIndex = operatorsArr.indexOf("/");
-  let additionIndex = operatorsArr.indexOf("+");
-  let substractionIndex = operatorsArr.indexOf("-");
-
   for (let i = 0; i < operatorsArr.length; ) {
-    if (multiplicationIndex != -1) {
+    if (operatorsArr.includes("*")) {
+      let multiplicationIndex = operatorsArr.indexOf("*");
       numbersArr.splice(
         multiplicationIndex,
         2,
@@ -104,7 +100,8 @@ function evaluateOperation(numbersArr, operatorsArr) {
       removeUsedOperator(multiplicationIndex);
     }
 
-    if (divisionIndex != -1) {
+    if (operatorsArr.includes("/")) {
+      let divisionIndex = operatorsArr.indexOf("/");
       if (numbersArr[divisionIndex + 1] == 0) return "divisionByZero";
       numbersArr.splice(
         divisionIndex,
@@ -114,7 +111,8 @@ function evaluateOperation(numbersArr, operatorsArr) {
       removeUsedOperator(divisionIndex);
     }
 
-    if (additionIndex != -1) {
+    if (operatorsArr.includes("+")) {
+      let additionIndex = operatorsArr.indexOf("+");
       numbersArr.splice(
         additionIndex,
         2,
@@ -124,13 +122,14 @@ function evaluateOperation(numbersArr, operatorsArr) {
       removeUsedOperator(additionIndex);
     }
 
-    if (substractionIndex != -1) {
+    if (operatorsArr.includes("-")) {
+      let subtractionIndex = operatorsArr.indexOf("-");
       numbersArr.splice(
-        substractionIndex,
+        subtractionIndex,
         2,
-        numbersArr[substractionIndex] - numbersArr[substractionIndex + 1]
+        numbersArr[subtractionIndex] - numbersArr[subtractionIndex + 1]
       );
-      removeUsedOperator(substractionIndex);
+      removeUsedOperator(subtractionIndex);
     }
   }
   return numbersArr[0];
