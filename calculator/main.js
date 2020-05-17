@@ -5,6 +5,9 @@ let numbers = [];
 
 function buttonPressed(key) {
   const keyAttribute = key.getAttribute("type");
+  const getLastValue = (array) => array[array.length - 1];
+  const isLastIndexAnOperator =
+    getLastValue(displayValue) != 0 && !parseFloat(getLastValue(displayValue));
 
   //first input must be a number
   if (displayValue.length == 0 && keyAttribute != "number") return;
@@ -16,12 +19,8 @@ function buttonPressed(key) {
       return;
 
     case "equals": // ==
-      // if last index is not a number then don't evaluate
-      if (
-        displayValue[displayValue.length - 1] != 0 &&
-        !parseFloat(displayValue[displayValue.length - 1])
-      )
-        return;
+      // if last index is an operator then delete it and evaluate
+      if (isLastIndexAnOperator) operators.splice(getLastValue(operators), 1);
       numbers.push(currentNum);
       let result = evaluateOperation(numbers, operators);
       resetValues();
@@ -31,11 +30,7 @@ function buttonPressed(key) {
 
     case "operator": // (*, /, +, -)
       // if last index is not a number then dont add another operator
-      if (
-        displayValue[displayValue.length - 1] != 0 &&
-        !parseFloat(displayValue[displayValue.length - 1])
-      )
-        return;
+      if (isLastIndexAnOperator) return;
       operators.push(key.textContent);
       if (currentNum != "") numbers.push(currentNum);
       currentNum = "";
