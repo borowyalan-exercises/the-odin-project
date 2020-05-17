@@ -1,0 +1,15 @@
+{
+  "name": "calculator",
+  "version": "0.0.1",
+  "description": "A simple calculator for theodinproject.com",
+  "main": "main.js",
+  "repository": "https://github.com/borowyalan-exercises/the-odin-project/tree/master/calculator",
+  "author": "Alan Borowy",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^26.0.1"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}

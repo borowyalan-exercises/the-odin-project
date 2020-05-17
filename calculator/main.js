@@ -146,3 +146,6 @@ function addEventListeners() {
 }
 
 addEventListeners();
+
+// don't run the code in the browser where the 'module' does not exist
+if(typeof module != "undefined") module.exports = evaluateOperation;
