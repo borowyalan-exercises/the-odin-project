@@ -51,6 +51,10 @@ body {
   font-size: 2em;
 }
 
+.key[type="equals"] { 
+  grid-row-end: span 2;
+}
+
 /* force keys to be at least as tall as wide */
 .key::before {
   content: "";
