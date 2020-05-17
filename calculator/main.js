@@ -4,6 +4,7 @@ let currentNum = "";
 let numbers = [];
 
 function buttonPressed(key) {
+  window.navigator.vibrate(5)
   const keyAttribute = key.getAttribute("type");
   const getLastValue = (array) => array[array.length - 1];
   const isLastIndexAnOperator =
