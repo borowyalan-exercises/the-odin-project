@@ -16,6 +16,7 @@ function buttonPressed(key) {
 
   //first input must be a number
   if (displayValue.length == 0 && keyAttribute != "number") return;
+  if (displayValue.length > 15) return;
 
   switch (keyAttribute) {
     case "clear": // C
