@@ -85,19 +85,23 @@ function resetValues() {
  * [4, 5, 7], [+, *] => [4, 35], [+] => [39], []
  */
 function evaluateOperation(numbersArr, operatorsArr) {
-  for (let i = 0; i < operatorsArr.length; ) {
-    let multiplicationIndex = operatorsArr.indexOf("*");
-    let divisionIndex = operatorsArr.indexOf("/");
-    let additionIndex = operatorsArr.indexOf("+");
-    let substractionIndex = operatorsArr.indexOf("-");
+  function removeUsedOperator(index) {
+    operatorsArr.splice(index, 1);
+  }
 
+  let multiplicationIndex = operatorsArr.indexOf("*");
+  let divisionIndex = operatorsArr.indexOf("/");
+  let additionIndex = operatorsArr.indexOf("+");
+  let substractionIndex = operatorsArr.indexOf("-");
+
+  for (let i = 0; i < operatorsArr.length; ) {
     if (multiplicationIndex != -1) {
       numbersArr.splice(
         multiplicationIndex,
         2,
         numbersArr[multiplicationIndex] * numbersArr[multiplicationIndex + 1]
       );
-      operatorsArr.splice(multiplicationIndex, 1);
+      removeUsedOperator(multiplicationIndex);
     }
 
     if (divisionIndex != -1) {
@@ -107,7 +111,7 @@ function evaluateOperation(numbersArr, operatorsArr) {
         2,
         numbersArr[divisionIndex] / numbersArr[divisionIndex + 1]
       );
-      operatorsArr.splice(divisionIndex, 1);
+      removeUsedOperator(divisionIndex);
     }
 
     if (additionIndex != -1) {
@@ -117,7 +121,7 @@ function evaluateOperation(numbersArr, operatorsArr) {
         parseFloat(numbersArr[additionIndex]) +
           parseFloat(numbersArr[additionIndex + 1])
       );
-      operatorsArr.splice(additionIndex, 1);
+      removeUsedOperator(additionIndex);
     }
 
     if (substractionIndex != -1) {
@@ -126,10 +130,9 @@ function evaluateOperation(numbersArr, operatorsArr) {
         2,
         numbersArr[substractionIndex] - numbersArr[substractionIndex + 1]
       );
-      operatorsArr.splice(substractionIndex, 1);
+      removeUsedOperator(substractionIndex);
     }
   }
-
   return numbersArr[0];
 }
 
