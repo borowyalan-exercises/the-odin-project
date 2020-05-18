@@ -1,4 +1,4 @@
-const evaluateOperation = require("./main.js");
+const evaluateOperation = require("./src/js/evaluateOperation.js");
 
 test("properly evaluates simple multiplication", () => {
   expect(evaluateOperation([2, 3], ["*"])).toBe(6);
@@ -22,7 +22,7 @@ test("respect order of operations", () => {
 });
 
 test("does not allow dividing by 0", () => {
-  expect(evaluateOperation([2, 0], ["/"])).toBe("divisionByZero");
+  expect(() => evaluateOperation([2, 0], ["/"])).toThrow("divisionByZero");
 });
 
 test("handles long operations", () => {
