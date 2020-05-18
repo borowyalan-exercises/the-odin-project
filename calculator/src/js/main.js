@@ -44,6 +44,13 @@ function keyPressed(key) {
       handleNumber(keyText);
       addToDisplay(keyText);
       break;
+
+    case "period":
+      if (currentNum.length !== 0) {
+        currentNum.push(keyText);
+      }
+      addToDisplay(keyText);
+      break;
   }
   lastInput = {
     type: keyType,
