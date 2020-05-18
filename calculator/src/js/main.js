@@ -6,11 +6,8 @@ let settings = {
   vibrations: document.querySelector("#vibrationsSetting"),
 };
 
-function keyPressed(key) {
+function keyPressed(keyText, keyType) {
   settings.vibrations.checked ? vibrate() : "";
-
-  const keyType = key.getAttribute("type");
-  const keyText = key.textContent;
 
   //first input must be a number
   if (displayValue.length === 0 && keyType !== "number") return;
@@ -56,12 +53,6 @@ function keyPressed(key) {
     type: keyType,
     text: keyText,
   };
-  console.table([
-    ["numbers", numbers],
-    ["operations", operators],
-    ["currentNumber", currentNum],
-    ["displayValue", displayValue],
-  ]);
 }
 
 function handleClear() {
@@ -114,7 +105,6 @@ function handleBackspace() {
     lastNumberWoLastDigit.length !== 0
       ? numbers.splice(-1, 1, lastNumberWoLastDigit)
       : numbers.splice(-1, 1);
-    console.log(lastNumber);
   }
 }
 
@@ -137,13 +127,30 @@ function addEventListeners() {
 
   keys.forEach((key) => {
     key.addEventListener("click", (event) => {
-      keyPressed(event.target);
+      keyPressed(key.textContent, key.getAttribute("type"));
     });
   });
 
-  window.addEventListener('keypress', (event) => {
-    console.log(event.keyCode)
-  })
+  window.addEventListener("keydown", (event) => {
+    let operators = ["*", "/", "+", "-"];
+    let key = event.key;
+    let keyType;
+
+    if (key === "Escape" || key === "c" || key == "Delete") {
+      keyType = "clear";
+    } else if (key === "Enter") {
+      keyType = "equals";
+    } else if (key >= 0 && key <= 9) {
+      keyType = "number";
+    } else if (operators.includes(key)) {
+      keyType = "operator";
+    } else if (key === ".") {
+      keyType = "period";
+    } else if (key === "Backspace") {
+      keyType = "backspace";
+    }
+    keyPressed(key, keyType);
+  });
 }
 
 addEventListeners();
