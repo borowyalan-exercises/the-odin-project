@@ -38,7 +38,7 @@ function evaluateOperation(numbersArr, operatorsArr) {
     }
   });
 
-  return numbersArr[0];
+  return numbersArr;
 }
 
 // don't run the code in the browser where the 'module' does not exist

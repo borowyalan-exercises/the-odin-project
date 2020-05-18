@@ -14,7 +14,7 @@ function keyPressed(key) {
 
   //first input must be a number
   if (displayValue.length === 0 && keyType !== "number") return;
-  if (displayValue.length > 15) return;
+  if (displayValue.length > 15 && keyType === "number") return;
 
   switch (keyType) {
     case "clear": // C
@@ -46,10 +46,10 @@ function keyPressed(key) {
       break;
 
     case "period":
-      if (currentNum.length !== 0) {
+      if (currentNum.length !== 0 && !currentNum.find((el) => el === ".")) {
         currentNum.push(keyText);
+        addToDisplay(keyText);
       }
-      addToDisplay(keyText);
       break;
   }
   lastInput = {
@@ -70,7 +70,7 @@ function handleClear() {
 }
 
 function handleNumber(keyText) {
-  if (parseFloat(currentNum[0]) === 0) {
+  if (currentNum[0] == 0 && currentNum.length < 2) {
     currentNum = [];
     deleteLastFromDisplay();
   }
@@ -97,8 +97,10 @@ function handleEquals() {
     return;
   }
   resetValues();
-  currentNum.push(evaluationResult);
-  return evaluationResult.toString();
+  console.log(currentNum, evaluationResult);
+
+  currentNum = currentNum.concat(evaluationResult);
+  return evaluationResult.join("").toString();
 }
 
 function handleBackspace() {
@@ -138,6 +140,10 @@ function addEventListeners() {
       keyPressed(event.target);
     });
   });
+
+  window.addEventListener('keypress', (event) => {
+    console.log(event.keyCode)
+  })
 }
 
 addEventListeners();
