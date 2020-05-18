@@ -66,6 +66,12 @@ body {
   background-color: red;
 }
 
+.key[type="operator"],
+.key[type="percent"] {
+  background-color: lightskyblue;
+  border: none;
+}
+
 /* force keys to be at least as tall as wide */
 .key::before {
   content: "";
