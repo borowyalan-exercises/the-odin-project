@@ -37,15 +37,17 @@ function buttonPressed(key) {
       break;
 
     case "backspace":
-      displayValue.pop();
-      if (currentNum.length){
+      if (currentNum.length) {
         currentNum.pop();
-      } else if(operators.length){
-        operators.pop()
+      } else if (getLastValue(displayValue) === getLastValue(operators)) {
+        operators.pop();
       } else {
-        numbers.pop()
+        let lastNumberWithoutLastDigit = numbers.splice(-1, 1)[0].slice(0, -1);
+        if (lastNumberWithoutLastDigit !== "") {
+          numbers.push(lastValueWithoutLastDigit);
+        }
       }
-      
+      displayValue.pop();
       addToDisplay("refresh");
       break;
 
