@@ -22,10 +22,10 @@ function buttonPressed(key) {
     case "clear": // C
       resetValues();
       addToDisplay("refresh");
-      return;
+      break;
 
     case "equals": // ===
-      if (operators.length !== 0) {
+      if (operators.length) {
         // if last index is an operator then delete it and evaluate
         if (isLastIndexAnOperator) operators.splice(getLastValue(operators), 1);
         numbers.push(currentNum.join(""));
@@ -38,41 +38,59 @@ function buttonPressed(key) {
 
     case "backspace":
       displayValue.pop();
-      currentNum.pop();
+      if (currentNum.length){
+        currentNum.pop();
+      } else if(operators.length){
+        operators.pop()
+      } else {
+        numbers.pop()
+      }
+      
       addToDisplay("refresh");
-      return;
+      break;
 
     case "operator": // (*, /, +, -)
-      // if last index is not a number then dont add another operator
-      if (isLastIndexAnOperator) return;
+      // dont allow two consecutive operators
+      if (isLastIndexAnOperator) break;
       operators.push(key.textContent);
 
-      if (currentNum !== "") numbers.push(currentNum.join(""));
+      if (currentNum.length) numbers.push(currentNum.join(""));
       currentNum = [];
       addToDisplay(key.textContent);
-      return;
+      break;
 
     // TODO
     case "percent":
-      return;
+      break;
 
     case "number":
       currentNum.push(key.textContent);
       addToDisplay(key.textContent);
+      break;
   }
+  console.log(
+    "nums",
+    numbers,
+    "signs",
+    operators,
+    "currNum",
+    currentNum,
+    "display",
+    displayValue
+  );
 }
 
 function addToDisplay(key) {
   const display = document.querySelector("#display");
 
-  if (key === "refresh") {
-    // displayValue.length === 0 ? displayValue.push("") : "";
-    display.textContent = displayValue.join("");
+  if (key === "" || key === undefined) {
+    display.textContent = "";
     return;
   }
 
-  if (key === "" || key === undefined) {
-    display.textContent = "";
+  if (key === "refresh") {
+    // displayValue.length === 0 ? displayValue.push("") : "";
+    display.textContent = displayValue.join("");
     return;
   }
 
@@ -115,7 +133,8 @@ function evaluateOperation(numbersArr, operatorsArr) {
       numbersArr.splice(
         multiplicationIndex,
         2,
-        numbersArr[multiplicationIndex] * numbersArr[multiplicationIndex + 1]
+        parseFloat(numbersArr[multiplicationIndex]) *
+          parseFloat(numbersArr[multiplicationIndex + 1])
       );
       removeUsedOperator(multiplicationIndex);
     }
@@ -126,7 +145,8 @@ function evaluateOperation(numbersArr, operatorsArr) {
       numbersArr.splice(
         divisionIndex,
         2,
-        numbersArr[divisionIndex] / numbersArr[divisionIndex + 1]
+        parseFloat(numbersArr[divisionIndex]) /
+          parseFloat(numbersArr[divisionIndex + 1])
       );
       removeUsedOperator(divisionIndex);
     }
@@ -147,7 +167,8 @@ function evaluateOperation(numbersArr, operatorsArr) {
       numbersArr.splice(
         subtractionIndex,
         2,
-        numbersArr[subtractionIndex] - numbersArr[subtractionIndex + 1]
+        parseFloat(numbersArr[subtractionIndex]) -
+          parseFloat(numbersArr[subtractionIndex + 1])
       );
       removeUsedOperator(subtractionIndex);
     }
