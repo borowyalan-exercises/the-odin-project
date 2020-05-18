@@ -28,3 +28,9 @@ test("does not allow dividing by 0", () => {
 test("handles long operations", () => {
   expect(evaluateOperation([2, 5, 9, 6, 8], ["+", "*", "/", "-"])).toBe(1.5);
 });
+
+test("handles strings and numbers", () => {
+  expect(evaluateOperation([2, "5", 9, "6", 8], ["+", "*", "/", "-"])).toBe(
+    1.5
+  );
+});
