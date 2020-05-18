@@ -2,6 +2,7 @@ let operators = [];
 let currentNum = [];
 let numbers = [];
 let lastInput = [];
+let lastAnswer = [];
 let settings = {
   vibrations: document.querySelector("#vibrationsSetting"),
 };
@@ -10,7 +11,8 @@ function keyPressed(keyText, keyType) {
   settings.vibrations.checked ? vibrate() : "";
 
   //first input must be a number
-  if (displayValue.length === 0 && keyType !== "number") return;
+  if (displayValue.length === 0 && keyType !== "number" && keyType !== "answer")
+    return;
   if (displayValue.length > 15 && keyType === "number") return;
 
   switch (keyType) {
@@ -27,7 +29,7 @@ function keyPressed(keyText, keyType) {
 
     case "backspace":
       handleBackspace();
-      deleteLastFromDisplay();
+      deleteFromDisplay(1);
       break;
 
     case "operator": // (*, /, +, -)
@@ -48,12 +50,32 @@ function keyPressed(keyText, keyType) {
         addToDisplay(keyText);
       }
       break;
+
+    case "answer":
+      if (
+        lastAnswer.length > 0 &&
+        currentNum.length + numbers.length + lastAnswer[0].length <= 10
+      ) {
+        deleteFromDisplay(currentNum.length);
+        currentNum = currentNum.concat(lastAnswer);
+        console.log(lastAnswer);
+        addToDisplay(lastAnswer);
+      }
+      break;
   }
   lastInput = {
     type: keyType,
     text: keyText,
   };
+  console.table([
+    ["numbers", numbers],
+    ["operations", operators],
+    ["currentNumber", currentNum],
+    ["displayValue", displayValue],
+    ["lastAnswer", lastAnswer],
+  ]);
 }
+// ================================================================
 
 function handleClear() {
   resetValues();
@@ -63,7 +85,7 @@ function handleClear() {
 function handleNumber(keyText) {
   if (currentNum[0] == 0 && currentNum.length < 2) {
     currentNum = [];
-    deleteLastFromDisplay();
+    deleteFromDisplay(1);
   }
   currentNum.push(keyText);
 }
@@ -76,13 +98,14 @@ function handleOperator(keyText) {
 function handleEquals() {
   if (lastInput.type === "operator") {
     operators.pop();
-    deleteLastFromDisplay();
+    deleteFromDisplay(1);
   }
 
   saveCurrentNumber();
   let evaluationResult;
   try {
     evaluationResult = evaluateOperation(numbers, operators);
+    evaluationResult[0] = evaluationResult[0].toString();
   } catch (errorMessage) {
     displayDivisionByZero(errorMessage);
     return;
@@ -90,6 +113,7 @@ function handleEquals() {
   resetValues();
   console.log(currentNum, evaluationResult);
 
+  lastAnswer = lastAnswer.concat(evaluationResult);
   currentNum = currentNum.concat(evaluationResult);
   return evaluationResult.join("").toString();
 }
@@ -120,6 +144,7 @@ function resetValues() {
   numbers = [];
   operators = [];
   displayValue = [];
+  lastAnswer = [];
 }
 
 function addEventListeners() {
@@ -148,6 +173,8 @@ function addEventListeners() {
       keyType = "period";
     } else if (key === "Backspace") {
       keyType = "backspace";
+    } else if (key === "a" || key === "n") {
+      keyType = "answer";
     }
     keyPressed(key, keyType);
   });

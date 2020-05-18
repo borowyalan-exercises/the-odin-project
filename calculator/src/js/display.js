@@ -25,8 +25,8 @@ function addToDisplay(keyText, setting) {
   //   }
 }
 
-function deleteLastFromDisplay() {
-  displayValue.pop();
+function deleteFromDisplay(charsToDelete) {
+  displayValue.splice(-1, charsToDelete);
   display.textContent = displayValue.join("");
 }
 function resetDisplay() {
