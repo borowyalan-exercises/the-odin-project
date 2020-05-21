@@ -4,7 +4,7 @@ let display = document.querySelector("#display");
 function addToDisplay(keyText, setting) {
   if (keyText !== "") {
     if (keyText.toString().length > 5) {
-      keyText = roundUpToFive(keyText);
+      keyText = roundUpToFiveDigits(keyText);
     }
     displayValue.push(keyText.toString());
     display.textContent = displayValue.join("");
